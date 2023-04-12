@@ -607,6 +607,17 @@ class Framework(cmd.Cmd):
         if not mute: self._display(data, rowcount)
         return rowcount
 
+    def insert_dnstxt(self, hostname=None, value=None, notes=None, mute=False):                                                                                                
+        '''Adds a dnstxt to the database and returns the affected row count.'''                                                                                                                                                        
+        data = dict(                                                                                                                                                                                                                       
+            hostname = hostname,
+            value = value,
+            notes = notes
+        )                                                                                                                                                                                                                                  
+        rowcount = self.insert('dnstxt', data.copy(), data.keys())                                                                                                                                                                   
+        if not mute: self._display(data, rowcount)                                                                                                                                                                                         
+        return rowcount
+
     def insert(self, table, data, unique_columns=[]):
         '''Inserts items into database and returns the affected row count.
         table - the table to insert the data into
